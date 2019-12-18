@@ -1,0 +1,14 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[user]
+	email = simonsk@outlook.com
+	name = Simon Kim
+	signingKey = B6A815BAEB6A6FB2
+[remote "origin"]
+	url = https://github.com/simonsk/geoip2-webapi
+	fetch = +refs/heads/*:refs/remotes/origin/*

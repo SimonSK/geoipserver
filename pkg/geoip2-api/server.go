@@ -1,11 +1,11 @@
-package server
+package geoip2_api
 
 import (
 	"fmt"
 	"net/http"
 
-	"github.com/SimonSK/geoip2-webapi/info"
-	"github.com/SimonSK/geoip2-webapi/mymaxminddb"
+	"github.com/SimonSK/geoip2-webapi/internal/info"
+	"github.com/SimonSK/geoip2-webapi/internal/mymaxminddb"
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
 )

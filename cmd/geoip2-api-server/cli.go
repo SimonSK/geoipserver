@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/SimonSK/geoip2-webapi/info"
+	"github.com/SimonSK/geoip2-webapi/internal/info"
 	"gopkg.in/urfave/cli.v1"
 )
 

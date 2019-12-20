@@ -1,4 +1,4 @@
-package server
+package geoip2api
 
 import (
 	"encoding/json"

@@ -1,4 +1,4 @@
-package geoip2_api
+package geoip2api
 
 import (
 	"fmt"

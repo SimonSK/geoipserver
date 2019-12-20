@@ -6,7 +6,6 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/SimonSK/geoip2-webapi/internal/info"
 	"gopkg.in/urfave/cli.v1"
 )
 
@@ -28,7 +27,7 @@ OPTIONS:
 	// Custom Version printer
 	cli.VersionPrinter = func(ctx *cli.Context) {
 		fmt.Printf("%s (%s)\n", ctx.App.HelpName, ctx.App.Name)
-		fmt.Printf("Version: %s\n", info.Version)
+		fmt.Printf("Version: %s\n", version)
 		fmt.Printf("Operating System: %s\n", runtime.GOOS)
 		fmt.Printf("Architecture: %s\n", runtime.GOARCH)
 		fmt.Printf("Go Version: %s\n", runtime.Version())
@@ -58,10 +57,10 @@ var (
 // newApp creates an app with sane defaults.
 func newApp(desc string) *cli.App {
 	app := cli.NewApp()
-	app.Name = info.Name
+	app.Name = name
 	app.HelpName = filepath.Base(os.Args[0])
-	app.Author = info.Author
-	app.Version = info.Version
+	app.Author = author
+	app.Version = version
 	app.Description = desc
 	app.Writer = os.Stdout
 	return app

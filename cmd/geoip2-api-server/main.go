@@ -8,7 +8,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/SimonSK/geoip2-webapi/internal/info"
 	"github.com/SimonSK/geoip2-webapi/pkg/geoip2-api"
 	nested "github.com/antonfisher/nested-logrus-formatter"
 	"github.com/sirupsen/logrus"
@@ -47,11 +46,17 @@ func makeServerConfig(ctx *cli.Context) (*geoip2_api.Config, error) {
 	}
 	listenPort := uint16(ctx.GlobalInt(strings.Split(listenPortFlag.Name, ",")[0]))
 	log.Debugf("[databaseBinaryFilepath=%s listenPort=%d] server configs", dbBinaryFullpath, listenPort)
-	return &geoip2_api.Config{log, dbBinaryFullpath, listenPort}, err
+	return &geoip2_api.Config{
+		nameWithVersion,
+		description,
+		log,
+		dbBinaryFullpath,
+		listenPort,
+	}, err
 }
 
 func start(ctx *cli.Context) error {
-	log.Debugf("starting %s", info.NameWithVersion)
+	log.Debugf("starting %s", nameWithVersion)
 
 	// Check argument
 	if !ctx.Args().Present() {
@@ -74,7 +79,7 @@ func start(ctx *cli.Context) error {
 }
 
 func main() {
-	app = newApp(info.Description)
+	app = newApp(description)
 	app.Before = setLogLevel
 	app.Action = start
 	app.Flags = append(app.Flags, flags...)

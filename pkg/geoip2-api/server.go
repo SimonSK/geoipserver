@@ -4,13 +4,14 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/SimonSK/geoip2-webapi/internal/info"
 	"github.com/SimonSK/geoip2-webapi/internal/mymaxminddb"
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
 )
 
 type Config struct {
+	Name             string
+	Description      string
 	Log              *logrus.Logger
 	DBBinaryFilepath string
 	ListenPort       uint16
@@ -22,8 +23,8 @@ type Server struct {
 }
 
 func (s *Server) info() string {
-	return fmt.Sprintln(info.NameWithVersion, "on port", s.ListenPort) +
-		fmt.Sprintln("Description:", info.Description) +
+	return fmt.Sprintln(s.Name, "on port", s.ListenPort) +
+		fmt.Sprintln("Description:", s.Description) +
 		fmt.Sprintln("") +
 		fmt.Sprintln("Database info:") +
 		fmt.Sprintln("\tType:", s.db.Metadata.DatabaseType) +

@@ -18,6 +18,7 @@ type Writer interface {
 	io.WriteCloser
 	ValidHash(expectedHash string) error
 	GetHash() string
+	UpdateFilepath(lastModified *time.Time)
 	SetFileModificationTime(lastModified time.Time) error
 	Commit() error
 }

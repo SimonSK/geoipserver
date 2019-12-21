@@ -11,7 +11,9 @@ import (
 )
 
 var (
-	version                  = "unknown"
+	versionMajor             = 0
+	versionMinor             = 1
+	version                  = fmt.Sprintf("%d.%d", versionMajor, versionMinor)
 	defaultConfigFile        string
 	defaultDatabaseDirectory string
 )

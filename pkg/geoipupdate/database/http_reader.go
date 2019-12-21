@@ -58,7 +58,9 @@ func (reader *HTTPDatabaseReader) Get(destination Writer, editionID string) erro
 	if err != nil {
 		return errors.Wrap(err, "error creating request")
 	}
-	req.SetBasicAuth(fmt.Sprintf("%d", reader.accountID), reader.licenseKey)
+	if reader.accountID != 0 {
+		req.SetBasicAuth(fmt.Sprintf("%d", reader.accountID), reader.licenseKey)
+	}
 
 	if reader.verbose {
 		log.Printf("Performing update request to %s", maxMindURL)

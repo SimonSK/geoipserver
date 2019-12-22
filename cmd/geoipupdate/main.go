@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/SimonSK/geoip2-webapi/pkg/geoipupdate"
-	"github.com/SimonSK/geoip2-webapi/pkg/geoipupdate/database"
-	"github.com/pkg/errors"
 	"log"
 	"os"
 	"path/filepath"
+
+	"github.com/SimonSK/geoip2-webapi/pkg/geoipupdate"
+	"github.com/SimonSK/geoip2-webapi/pkg/geoipupdate/database"
+	"github.com/pkg/errors"
 )
 
 var (

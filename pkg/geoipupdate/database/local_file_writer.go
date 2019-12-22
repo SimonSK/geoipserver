@@ -156,7 +156,7 @@ func (writer *LocalFileDatabaseWriter) Commit() error {
 	// Create a symlink to the recently downloaded file
 	// target file is expected to be in same directory as the symlink
 	if writer.symlinkPath != writer.filePath {
-		if err := os.Remove(writer.symlinkPath); err != nil && os.IsExist(err){
+		if err := os.Remove(writer.symlinkPath); err != nil && os.IsExist(err) {
 			return errors.Wrap(err, "error removing existing symlink")
 		}
 		if err := os.Symlink(filepath.Base(writer.filePath), writer.symlinkPath); err != nil {

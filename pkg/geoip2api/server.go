@@ -41,14 +41,15 @@ func (s *Server) Start() error {
 	// Open database binary
 	s.Log.Debugf("opening %s", s.DBBinaryFilepath)
 	db, err := mymaxminddb.Open(s.DBBinaryFilepath)
+	if err != nil {
+		return err
+	}
 	defer func() {
 		if err := db.Close(); err != nil {
 			s.Log.Error(err)
 		}
 	}()
-	if err != nil {
-		return err
-	}
+
 	s.db = db
 	dbType := s.db.Metadata.DatabaseType
 	dbFormatVersion := s.db.Metadata.FormatVersion()

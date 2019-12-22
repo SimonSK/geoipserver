@@ -25,3 +25,7 @@ updater: clean-updater
 	go build -v -ldflags="-s -w" -o ${OUTPUT_DIR}/${BIN_UPDATER} ./cmd/${BIN_UPDATER}/...
 
 all: clean server updater
+
+docker-images: clean
+	docker build -t ${BIN_SERVER} -f ${BIN_SERVER}.Dockerfile .
+	docker build -t ${BIN_UPDATER} -f ${BIN_UPDATER}.Dockerfile .

@@ -57,7 +57,7 @@ func (s *Server) handleDefault(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) handleIPDetails(w http.ResponseWriter, r *http.Request) {
-	route := "default"
+	route := "details"
 	contentType := "application/json"
 	var (
 		status int

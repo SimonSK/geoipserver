@@ -2,16 +2,19 @@ package main
 
 import (
 	"fmt"
-	"github.com/SimonSK/geoip2-webapi/pkg/geoipupdate"
-	"github.com/SimonSK/geoip2-webapi/pkg/geoipupdate/database"
-	"github.com/pkg/errors"
 	"log"
 	"os"
 	"path/filepath"
+
+	"github.com/SimonSK/geoip2-webapi/pkg/geoipupdate"
+	"github.com/SimonSK/geoip2-webapi/pkg/geoipupdate/database"
+	"github.com/pkg/errors"
 )
 
 var (
-	version                  = "unknown"
+	versionMajor             = 0
+	versionMinor             = 1
+	version                  = fmt.Sprintf("%d.%d", versionMajor, versionMinor)
 	defaultConfigFile        string
 	defaultDatabaseDirectory string
 )

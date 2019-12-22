@@ -58,7 +58,9 @@ func (reader *HTTPDatabaseReader) Get(destination Writer, editionID string) erro
 	if err != nil {
 		return errors.Wrap(err, "error creating request")
 	}
-	req.SetBasicAuth(fmt.Sprintf("%d", reader.accountID), reader.licenseKey)
+	if reader.accountID != 0 {
+		req.SetBasicAuth(fmt.Sprintf("%d", reader.accountID), reader.licenseKey)
+	}
 
 	if reader.verbose {
 		log.Printf("Performing update request to %s", maxMindURL)
@@ -110,16 +112,18 @@ func (reader *HTTPDatabaseReader) Get(destination Writer, editionID string) erro
 		return err
 	}
 
+	modificationTime, err := lastModified(response.Header.Get("Last-Modified"))
+	if err != nil {
+		return errors.Wrap(err, "unable to get last modified time")
+	}
+	destination.UpdateFilepath(modificationTime)
+
 	if err := destination.Commit(); err != nil {
 		return errors.Wrap(err, "encountered an issue committing database update")
 	}
 
 	if reader.preserveFileTimes {
-		modificationTime, err := lastModified(response.Header.Get("Last-Modified"))
-		if err != nil {
-			return errors.Wrap(err, "unable to get last modified time")
-		}
-		err = destination.SetFileModificationTime(modificationTime)
+		err = destination.SetFileModificationTime(*modificationTime)
 		if err != nil {
 			return errors.Wrap(err, "unable to set modification time")
 		}
@@ -129,15 +133,15 @@ func (reader *HTTPDatabaseReader) Get(destination Writer, editionID string) erro
 }
 
 // LastModified retrieves the date that the MaxMind database was last modified.
-func lastModified(lastModified string) (time.Time, error) {
+func lastModified(lastModified string) (*time.Time, error) {
 	if lastModified == "" {
-		return time.Time{}, errors.New("no Last-Modified header found")
+		return nil, errors.New("no Last-Modified header found")
 	}
 
 	t, err := time.ParseInLocation(time.RFC1123, lastModified, time.UTC)
 	if err != nil {
-		return time.Time{}, errors.Wrap(err, "error parsing time")
+		return nil, errors.Wrap(err, "error parsing time")
 	}
 
-	return t, nil
+	return &t, nil
 }

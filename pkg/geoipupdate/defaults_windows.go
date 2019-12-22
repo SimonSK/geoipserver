@@ -1,8 +1,6 @@
 package geoipupdate
 
-import (
-	"os"
-)
+import "os"
 
 var (
 	// I'm not sure these make sense. However they can be overridden at runtime

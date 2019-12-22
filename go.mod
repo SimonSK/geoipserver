@@ -10,5 +10,6 @@ require (
 	github.com/pkg/errors v0.8.1
 	github.com/sirupsen/logrus v1.4.2
 	github.com/spf13/pflag v1.0.5
+	github.com/stretchr/testify v1.2.2
 	gopkg.in/urfave/cli.v1 v1.20.0
 )

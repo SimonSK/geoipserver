@@ -10,7 +10,3 @@ bin
 
 # ide
 .idea
-
-# geoipupdate files
-.geoipupdate.lock
-*.mmdb.temporary

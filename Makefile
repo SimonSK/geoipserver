@@ -1,7 +1,7 @@
 SHELL = /bin/bash
 export GO111MODULE=on
 
-BIN_SERVER = geoip2-api-server
+NAME = geoipserver
 OUTPUT_DIR = bin
 
 .PHONY: clean server
@@ -11,7 +11,7 @@ clean:
 
 server: clean
 	@mkdir -p ${OUTPUT_DIR}
-	go build -v -ldflags="-s -w" -o ${OUTPUT_DIR}/${BIN_SERVER} ./cmd/${BIN_SERVER}/...
+	go build -v -ldflags="-s -w" -o ${OUTPUT_DIR}/${NAME} ./cmd/${NAME}/...
 
 docker-image: clean
-	docker build -t ${BIN_SERVER} -f ${BIN_SERVER}.Dockerfile .
+	docker build -t ${NAME} -f Dockerfile .

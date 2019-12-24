@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 const (
-	name         = "MaxMind GeoIP2 WebAPI Server"
+	name         = "GeoIP WebAPI Server"
 	description  = "A simple web API server that reads GeoIP2/GeoLite2 database binary and echoes out latitude and longitude information for a given IP address"
 	author       = "Simon Kim"
 	versionMajor = 0

@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/SimonSK/geoip2-webapi/pkg/geoip2api"
+	"github.com/SimonSK/geoipserver/pkg/webapi"
 	nested "github.com/antonfisher/nested-logrus-formatter"
 	"github.com/sirupsen/logrus"
 	"gopkg.in/urfave/cli.v1"
@@ -39,14 +39,14 @@ func setLogLevel(ctx *cli.Context) error {
 	return nil
 }
 
-func makeServerConfig(ctx *cli.Context) (*geoip2api.Config, error) {
+func makeServerConfig(ctx *cli.Context) (*webapi.Config, error) {
 	dbBinaryFullpath, err := filepath.Abs(ctx.Args()[0])
 	if err != nil {
 		return nil, err
 	}
 	listenPort := uint16(ctx.GlobalInt(strings.Split(listenPortFlag.Name, ",")[0]))
 	log.Debugf("[databaseBinaryFilepath=%s listenPort=%d] server configs", dbBinaryFullpath, listenPort)
-	return &geoip2api.Config{
+	return &webapi.Config{
 		nameWithVersion,
 		description,
 		log,
@@ -72,7 +72,7 @@ func start(ctx *cli.Context) error {
 	}
 
 	// Create server
-	s := &geoip2api.Server{Config: *config}
+	s := &webapi.Server{Config: *config}
 
 	// Start server
 	return s.Start()

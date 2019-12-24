@@ -1,4 +1,4 @@
-module github.com/SimonSK/geoip2-webapi
+module github.com/SimonSK/geoipserver
 
 go 1.13
 
